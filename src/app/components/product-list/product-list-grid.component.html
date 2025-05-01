@@ -15,6 +15,7 @@
             <a routerLink="/products/{{ tempProduct.id }}">
               <img src="{{ tempProduct.imageUrl }}" class="img-responsive">
             </a>
+            <br>
 
             <a routerLink="/products/{{ tempProduct.id }}">
               <h1>{{ tempProduct.name }}</h1>
@@ -47,6 +48,7 @@
                 <ngb-pagination [(page)]="thePageNumber"
                   [pageSize]="thePageSize"
                   [collectionSize]="theTotalElements"
+                  [maxSize]="5"
                   (pageChange)="listProducts()">
 
                 </ngb-pagination>
@@ -58,6 +60,7 @@
 
                 <select #myPageSelect
                   (change)="updatePageSize(myPageSelect.value)">
+                  <option>2</option>
                   <option selected="true">5</option>
                   <option>10</option>
                   <option>20</option>
