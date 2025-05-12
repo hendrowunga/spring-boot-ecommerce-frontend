@@ -12,53 +12,23 @@ export class CartService {
   totalPrice: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalQuantity: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  // storage: Storage = localStorage; // Gunakan localStorage untuk persistensi antar sesi
+  storage: Storage = sessionStorage;
+  // storage: Storage = localStorage;
 
   constructor() {
-    // console.log('CartService constructor: Initializing...');
-    // // Baca data dari storage saat service diinisialisasi
-    // // let data = this.storage.getItem('cartItems');
-    // if (data != null) {
-    //   try {
-    //     const parsedData = JSON.parse(data);
-    //     // Validasi sederhana jika data yang diparsing adalah array
-    //     if (Array.isArray(parsedData)) {
-    //       this.cartItems = parsedData;
-    //       console.log(
-    //         'CartService: Loaded items from localStorage:',
-    //         this.cartItems.length
-    //       );
-    //       // Hitung ulang total saat memuat, JIKA ada item
-    //       if (this.cartItems.length > 0) {
-    //         this.computeCartTotals();
-    //       } else {
-    //         // Jika array kosong setelah parsing, pastikan subject diupdate ke 0
-    //         this.totalPrice.next(0);
-    //         this.totalQuantity.next(0);
-    //       }
-    //     } else {
-    //       console.warn(
-    //         'CartService: Data from localStorage is not an array. Resetting cart.'
-    //       );
-    //       this.cartItems = [];
-    //       this.persistCartItems(); // Simpan state kosong yg valid
-    //       this.totalPrice.next(0);
-    //       this.totalQuantity.next(0);
-    //     }
-    //   } catch (e) {
-    //     console.error('CartService: Error parsing cart items from storage', e);
-    //     this.cartItems = []; // Reset jika ada error parsing
-    //     this.persistCartItems(); // Simpan state kosong yg valid
-    //     this.totalPrice.next(0);
-    //     this.totalQuantity.next(0);
-    //   }
-    // } else {
-    //   console.log(
-    //     'CartService: No cart items found in localStorage. Initializing empty cart.'
-    //   );
-    //   this.cartItems = []; // Pastikan array kosong jika tidak ada di storage
-    //   // Tidak perlu panggil computeCartTotals karena sudah diinisialisasi ke 0
-    // }
+    // read data from storage
+    let data = JSON.parse(this.storage.getItem('cartItems')!);
+
+    if (data != null) {
+      this.cartItems = data;
+
+      // compute totals based on the data that is read from storage
+      this.computeCartTotals();
+    }
+  }
+
+  persistCartItems() {
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 
   addToCart(theCartItem: CartItem) {
@@ -110,17 +80,8 @@ export class CartService {
     this.logCartData(totalPriceValue, totalQuantityValue);
 
     // Simpan state ke storage setiap kali total dihitung ulang
-    // this.persistCartItems();
+    this.persistCartItems();
   }
-
-  // persistCartItems() {
-  //   console.log('CartService: Persisting cart items to localStorage.');
-  //   try {
-  //     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
-  //   } catch (e) {
-  //     console.error('CartService: Error saving cart items to storage', e);
-  //   }
-  // }
 
   logCartData(totalPriceValue: number, totalQuantityValue: number) {
     console.log('--- Cart Contents ---');
@@ -182,11 +143,4 @@ export class CartService {
       );
     }
   }
-
-  // // Metode untuk membersihkan cart dan storage setelah checkout berhasil
-  // clearCart() {
-  //   console.log('CartService: Clearing cart and localStorage.');
-  //   this.cartItems = [];
-  //   this.computeCartTotals(); // Ini akan update subject dan persist state kosong
-  // }
 }
