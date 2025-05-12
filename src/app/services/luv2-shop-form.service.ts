@@ -5,14 +5,13 @@ import { Observable, of } from 'rxjs'; // Impor 'of' untuk credit card months/ye
 import { map } from 'rxjs/operators';
 import { Country } from '../common/country';
 import { State } from '../common/state';
-
 @Injectable({
   providedIn: 'root',
 })
 export class Luv2ShopFormService {
   // Sesuaikan URL API Backend Anda
-  private countriesUrl = 'http://localhost:8080/api/countries';
-  private statesUrl = 'http://localhost:8080/api/states';
+  private countriesUrl = 'http://localhost:9898/api/countries';
+  private statesUrl = 'http://localhost:9898/api/states';
 
   constructor(private httpClient: HttpClient) {}
 
