@@ -1,6 +1,13 @@
-# Frontend
+# 🖥️ Frontend E-Commerce Application (Angular)
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+
+## 🔗 Backend Repository
+
+This frontend project is designed to work with a Spring Boot backend. You can find the backend repository here:
+
+👉 [spring-boot-ecommerce-backend (GitHub)](https://github.com/hendrowunga/spring-boot-ecommerce-backend.git)
+
 
 ## Development server
 
@@ -35,6 +42,18 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## ✨ Frontend UI Preview
+Below is a preview of the main interface of the frontend E-Commerce website:
+<p><em>Display in the Angular frontend</em></p>
+<div align="center"> <img src="public/f3.png" alt="Frontend UI Preview" width="800"/></div>
+<div align="center"> <img src="public/f1.png" alt="Frontend UI Preview" width="800"/></div>
+<div align="center"> <img src="public/f2.png" alt="Frontend UI Preview" width="800"/>  </div>
+<div align="center"> <img src="public/f4.png" alt="Frontend UI Preview" width="800"/></div>
+<div align="center"> <img src="public/f5.png" alt="Frontend UI Preview" width="800"/>
+</div>
+<div align="center"> <img src="public/f6.png" alt="Frontend UI Preview" width="800"/></div>
+<div align="center"> <img src="public/f7.png" alt="Frontend UI Preview" width="800"/></div>
 
 ## Running unit tests
 
